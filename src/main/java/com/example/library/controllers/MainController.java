@@ -7,7 +7,13 @@ import com.example.library.Repositories.BookRepository;
 import com.example.library.Repositories.BorrowerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.ArrayList;
 
 @Controller
 public class MainController {
@@ -20,22 +26,38 @@ public class MainController {
     }
 
     @GetMapping("/")
-    public String maninPage(){
-        Book book = new Book();
-        book.setAuthor("author1");
-        book.setTitle("tittle1");
-        book.setISBN("ISBN1");
-        book.setPublisher("Publisher1");
-        bookRepository.save(book);
+    public String homePage(Model model){
+        Iterable<Book> books = bookRepository.findAll();
+/*        Book book1 = new Book();
+        book1.setAuthor("asd");
+        book1.setISBN("asd");
+        book1.setPublisher("asd");
+        book1.setTitle("asd");
+        bookRepository.save(book1);*/
 
-        Borrower borrower = new Borrower();
-        borrower.setEmail("email1");
-        borrower.setName("name1");
-        borrower.setPhone_number("phone_number1");
 
-        borrowerRepository.save(borrower);
+
+
+
+
+        model.addAttribute("book",books);
 
         return "mainPage";
+
+    }
+    @GetMapping("/edit/{id}")
+    public String editB(Model model){
+        return "main";
+    }
+    @PostMapping("/")
+    public String postMain(@ModelAttribute("book") Book book,Model model){
+
+        bookRepository.save(book);
+
+
+
+
+        return "redirect:/";
     }
 
 
