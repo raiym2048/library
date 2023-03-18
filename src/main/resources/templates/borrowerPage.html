@@ -20,6 +20,13 @@
     <input type="text" name="email">
     <input type="text" name="phone">
 
+        <select name="borrowersBook">
+          <tr th:each="book : ${books}">
+          <option th:value="${book.author}" th:text="${book.author}"></option>
+          </tr>
+        </select>
+
+
     <div>
       <button class="w-100 btn btn-lg btn-primary" type="submit">Add</button>
     </div>
@@ -28,11 +35,11 @@
   <!--    private String  title, author, publisher, ISBN;
   -->
   <tr th:each="booki : ${borrower}">
-    <td th:text="${booki.id}"></td>
-    <td th:text="${booki.name}"></td>
-    <td th:text="${booki.email}"></td>
-    <td th:text="${booki.phone}"></td>
-    <td th:text="${booki.borrowersBook}"></td>
+    <td th:text="${booki.id}">id:</td>
+    <td th:text="${booki.name}">name:</td>
+    <td th:text="${booki.email}">email:</td>
+    <td th:text="${booki.phone}">phone:</td>
+    <td th:text="${booki.borrowersBook}">the book:</td>
 <!--  <tr th:each="books : ${book}">
   <select name="selecting_book">
     <option th:value="${books.author}">www</option>
@@ -44,6 +51,8 @@
       <a th:method="get" class="nameAclass" th:href="@{/borrower/delete/{id}(id=${booki.id})}">delete</a>
     </div>
   </tr>
+
+  <a th:href="@{/}">IM AUTHOR!</a>
 
 </div>
 </body>

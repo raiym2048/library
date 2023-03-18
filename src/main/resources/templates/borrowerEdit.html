@@ -6,7 +6,7 @@
   <title>Title</title>
 </head>
 <body>
-<form method="post" action="/borrower/edit/{id}" th:action="@{/borrower/edit/{id}}" th:object="${borrower}" >
+<form method="post" th:action="@{/borrower/edit/{id}}" action="/borrower/edit/{id}" th:object="${borrower}">
 
   <!--    private String  title, author, publisher, ISBN;
 -->
@@ -17,6 +17,11 @@
   <input type="text" name="name" th:value="${borrower.name}">
   <input type="text" name="email" th:value="${borrower.email}">
   <input type="text" name="phone" th:value="${borrower.phone}">
+  <select name="borrowersBook">
+    <tr th:each="book : ${books}">
+      <option th:value="${book.author}" th:text="${book.author}"></option>
+    </tr>
+  </select>
 
 
   <div>

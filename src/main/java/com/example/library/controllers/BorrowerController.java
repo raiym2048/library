@@ -4,6 +4,7 @@ package com.example.library.controllers;
 import com.example.library.Models.Borrower;
 import com.example.library.Repositories.BookRepository;
 import com.example.library.Repositories.BorrowerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,16 +21,21 @@ public class BorrowerController {
     private final
     BorrowerRepository borrowerRepository;
 
+    private final
+    BookRepository bookRepository;
 
 
-    public BorrowerController(BorrowerRepository borrowerRepository) {
+
+    public BorrowerController(BorrowerRepository borrowerRepository, BookRepository bookRepository) {
         this.borrowerRepository = borrowerRepository;
+        this.bookRepository = bookRepository;
     }
 
 
     @GetMapping("/borrower/")
     public String borrowerPage(Model model){
         model.addAttribute("borrower", borrowerRepository.findAll());
+        model.addAttribute("books", bookRepository.findAll());
 
         return "borrowerPage";
     }
@@ -37,6 +43,8 @@ public class BorrowerController {
     @GetMapping("/borrower/edit/{id}")
     public String borrowerEdit(@PathVariable Long id, Model model){
         model.addAttribute("borrower", borrowerRepository.findAllById(id));
+        model.addAttribute("books", bookRepository.findAll());
+
         return "borrowerEdit";
     }
     @GetMapping("/borrower/delete/{id}")
@@ -46,23 +54,23 @@ public class BorrowerController {
         return "redirect:/borrower/";
     }
     @PostMapping("/borrower/edit/{id}")
-    public String edit(@Valid @ModelAttribute("book") Borrower book, BindingResult errors , Model model){
-        if (errors.hasErrors() || book.getName().isEmpty()
-                || book.getEmail().isEmpty() || book.getPhone().isEmpty()) {
-            return "redirect:/edit/"+book.getId();
+    public String edit(@Valid @ModelAttribute("borrower") Borrower borrower, BindingResult errors , Model model){
+        if (errors.hasErrors() || borrower.getName().isEmpty()
+                || borrower.getEmail().isEmpty() || borrower.getPhone().isEmpty()) {
+            return "redirect:/edit/"+borrower.getId();
         }
 
-        borrowerRepository.save(book);
+        borrowerRepository.save(borrower);
         return "redirect:/borrower/";
     }
     @PostMapping("/borrower/")
-    public String postMain(@Valid @ModelAttribute("book") Borrower book, BindingResult errors , Model model){
-        if (errors.hasErrors() || book.getName().isEmpty()
-                || book.getEmail().isEmpty() || book.getPhone().isEmpty()) {
+    public String postMain(@Valid @ModelAttribute("borrower") Borrower borrower, BindingResult errors , Model model){
+        if (errors.hasErrors() || borrower.getName().isEmpty()
+                || borrower.getEmail().isEmpty() || borrower.getPhone().isEmpty()) {
             return "redirect:/borrower/";
         }
 
-        borrowerRepository.save(book);
+        borrowerRepository.save(borrower);
 
 
 
