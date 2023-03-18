@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -36,9 +36,12 @@
         <td th:text="${booki.publisher}"></td>
         <td th:text="${booki.ISBN}"></td>
         <div class="addDiv">
-            <a class="nameAclass" th:href="@{/edit/{id}(id=${booki.id})}">buy</a>
+            <a class="nameAclass" th:href="@{/edit/{id}(id=${booki.id})}">edit</a>
+            <a th:method="get" class="nameAclass" th:href="@{/delete/{id}(id=${booki.id})}">delete</a>
         </div>
     </tr>
+
+    <a th:href="@{/borrower/}">IM BORROWER!</a>
 
 </div>
 </body>

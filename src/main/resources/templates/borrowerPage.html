@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<body>
+
+
+<div >
+  <form method="post" action="/borrower/" th:action="@{/borrower/}" th:object="${borrower}" >
+
+    <!--    private String  title, author, publisher, ISBN;
+  -->
+    <!--
+        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Invalid name</p>
+    -->
+    <input type="text" name="name">
+    <input type="text" name="email">
+    <input type="text" name="phone">
+
+    <div>
+      <button class="w-100 btn btn-lg btn-primary" type="submit">Add</button>
+    </div>
+  </form>
+
+  <!--    private String  title, author, publisher, ISBN;
+  -->
+  <tr th:each="booki : ${borrower}">
+    <td th:text="${booki.id}"></td>
+    <td th:text="${booki.name}"></td>
+    <td th:text="${booki.email}"></td>
+    <td th:text="${booki.phone}"></td>
+    <td th:text="${booki.borrowersBook}"></td>
+<!--  <tr th:each="books : ${book}">
+  <select name="selecting_book">
+    <option th:value="${books.author}">www</option>
+  </select>
+</tr>-->
+
+    <div class="addDiv">
+      <a class="nameAclass" th:href="@{/borrower/edit/{id}(id=${booki.id})}">edit</a>
+      <a th:method="get" class="nameAclass" th:href="@{/borrower/delete/{id}(id=${booki.id})}">delete</a>
+    </div>
+  </tr>
+
+</div>
+</body>
+</html>

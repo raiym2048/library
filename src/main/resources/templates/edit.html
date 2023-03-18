@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" action="/edit/{id}" th:action="@{/edit/{id}}" th:object="${book}" >
+
+    <!--    private String  title, author, publisher, ISBN;
+  -->
+    <!--
+        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Invalid name</p>
+    -->
+    <input type="number" name="id" th:value="${book.id}">
+
+    <input type="text" name="title" th:value="${book.title}">
+    <input type="text" name="author" th:value="${book.author}">
+    <input type="text" name="publisher" th:value="${book.publisher}">
+    <input type="text" name="ISBN" th:value="${book.ISBN}">
+
+
+    <div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Add</button>
+    </div>
+</form>
+
+</body>
+</html>

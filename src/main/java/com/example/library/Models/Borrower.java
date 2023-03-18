@@ -8,12 +8,17 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Borrower {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String name, email,  phone;
 
-    private Long id;
+    public String getBorrowersBook() {
+        return borrowersBook;
+    }
 
-    private String  name, email, phone_number;
+    public void setBorrowersBook(String borrowersBook) {
+        this.borrowersBook = borrowersBook;
+    }
+
+    private String borrowersBook;
 
     public String getName() {
         return name;
@@ -31,18 +36,26 @@ public class Borrower {
         this.email = email;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     public void setId(Long id) {
         this.id = id;
     }
+
+
     public Long getId() {
         return id;
     }
+
+
 }
