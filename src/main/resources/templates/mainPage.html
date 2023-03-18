@@ -16,10 +16,10 @@
         <!--
             <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Invalid name</p>
         -->
-        <input type="text" name="title">
-        <input type="text" name="author">
-        <input type="text" name="publisher">
-        <input type="text" name="ISBN">
+        <p>title <input type="text" name="title">
+        author<input type="text" name="author">
+        publisher<input type="text" name="publisher">
+        ISBN<input type="text" name="ISBN"></p>
 
 
         <div>
@@ -28,21 +28,22 @@
     </form>
 
 <!--    private String  title, author, publisher, ISBN;
--->
+--> <p>id:    title:  author:    publisher:  ISBN:</p>
     <tr th:each="booki : ${book}">
         <td th:text="${booki.id}"></td>
         <td th:text="${booki.title}"></td>
         <td th:text="${booki.author}"></td>
         <td th:text="${booki.publisher}"></td>
         <td th:text="${booki.ISBN}"></td>
-        <div class="addDiv">
+
             <a class="nameAclass" th:href="@{/edit/{id}(id=${booki.id})}">edit</a>
             <a th:method="get" class="nameAclass" th:href="@{/delete/{id}(id=${booki.id})}">delete</a>
-        </div>
+<div></div>
     </tr>
 
-    <a th:href="@{/borrower/}">IM BORROWER!</a>
+
 
 </div>
+<a th:href="@{/borrower/}">IM BORROWER!</a>
 </body>
 </html>

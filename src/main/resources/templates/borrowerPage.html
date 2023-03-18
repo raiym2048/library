@@ -16,15 +16,15 @@
     <!--
         <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Invalid name</p>
     -->
-    <input type="text" name="name">
-    <input type="text" name="email">
-    <input type="text" name="phone">
-
-        <select name="borrowersBook">
+    <p>name <input type="text" name="name">
+      email<input type="text" name="email">
+      phone<input type="text" name="phone">
+        the book<select name="borrowersBook">
           <tr th:each="book : ${books}">
           <option th:value="${book.author}" th:text="${book.author}"></option>
           </tr>
         </select>
+    </p>
 
 
     <div>
@@ -34,6 +34,7 @@
 
   <!--    private String  title, author, publisher, ISBN;
   -->
+  <p>id:    name:  email:    phone:   borrowers Book:</p>
   <tr th:each="booki : ${borrower}">
     <td th:text="${booki.id}">id:</td>
     <td th:text="${booki.name}">name:</td>
@@ -46,14 +47,14 @@
   </select>
 </tr>-->
 
-    <div class="addDiv">
       <a class="nameAclass" th:href="@{/borrower/edit/{id}(id=${booki.id})}">edit</a>
       <a th:method="get" class="nameAclass" th:href="@{/borrower/delete/{id}(id=${booki.id})}">delete</a>
-    </div>
+    <div></div>
   </tr>
 
-  <a th:href="@{/}">IM AUTHOR!</a>
+
 
 </div>
+<a th:href="@{/}">IM AUTHOR!</a>
 </body>
 </html>

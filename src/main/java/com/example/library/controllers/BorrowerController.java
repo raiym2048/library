@@ -66,7 +66,7 @@ public class BorrowerController {
     @PostMapping("/borrower/")
     public String postMain(@Valid @ModelAttribute("borrower") Borrower borrower, BindingResult errors , Model model){
         if (errors.hasErrors() || borrower.getName().isEmpty()
-                || borrower.getEmail().isEmpty() || borrower.getPhone().isEmpty()) {
+                || borrower.getEmail().isEmpty() || borrower.getPhone().isEmpty() || borrower.getBorrowersBook().isEmpty()) {
             return "redirect:/borrower/";
         }
 

@@ -13,12 +13,11 @@
     <!--
         <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Invalid name</p>
     -->
-    <input type="number" name="id" th:value="${book.id}">
-
-    <input type="text" name="title" th:value="${book.title}">
-    <input type="text" name="author" th:value="${book.author}">
-    <input type="text" name="publisher" th:value="${book.publisher}">
-    <input type="text" name="ISBN" th:value="${book.ISBN}">
+    <p>id:<input type="number" name="id" th:value="${book.id}">
+    title:<input type="text" name="title" th:value="${book.title}">
+    author:<input type="text" name="author" th:value="${book.author}">
+    publisher:<input type="text" name="publisher" th:value="${book.publisher}">
+        ISBN:<input type="text" name="ISBN" th:value="${book.ISBN}"></p>
 
 
     <div>

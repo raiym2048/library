@@ -13,15 +13,16 @@
   <!--
       <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Invalid name</p>
   -->
-  <input type="number" name="id" th:value="${borrower.id}">
-  <input type="text" name="name" th:value="${borrower.name}">
-  <input type="text" name="email" th:value="${borrower.email}">
-  <input type="text" name="phone" th:value="${borrower.phone}">
-  <select name="borrowersBook">
+  <p>id:<input type="number" name="id" th:value="${borrower.id}">
+  name:<input type="text" name="name" th:value="${borrower.name}">
+  email:<input type="text" name="email" th:value="${borrower.email}">
+  phone:<input type="text" name="phone" th:value="${borrower.phone}">
+    the book:<select name="borrowersBook">
     <tr th:each="book : ${books}">
       <option th:value="${book.author}" th:text="${book.author}"></option>
     </tr>
   </select>
+  </p>
 
 
   <div>
