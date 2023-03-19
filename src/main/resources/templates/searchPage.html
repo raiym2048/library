@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div class="container mt-5">
+    <h2 align="center">Search in Thymeleaf Template</h2>
+    <form th:action="@{/search}" method="get">
+        <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find Title & Author" size="50" >
+        <button type="submit" class="btn btn-info" >Search</button>
+        <button type="submit" class="btn btn-info" >Reset</button>
+    </form>
+    <table class="table table-bordered table-sm mt-2">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Publisher</th>
+            <th>ISBN</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="l : ${list}" th:field="${l}">
+            <td th:text="${lStat.index+1}"></td>
+            <td th:text="${l.title}"></td>
+            <td th:text="${l.author}"></td>
+            <td th:text="${l.publisher}"></td>
+            <td th:text="${l.ISBN}"></td>
+            <td>
+                <a th:href="@{/edit/{id}(id=${l.id})}" >edit<i class="fa fa-edit" ></i></a>
+                <a th:href="@{/delete/{id}(id=${l.id})}" >delete<i class="fa fa-remove"></i></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

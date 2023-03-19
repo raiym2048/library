@@ -1,19 +1,20 @@
 package com.example.library.controllers;
 
 
+import com.example.library.Models.Book;
 import com.example.library.Models.Borrower;
 import com.example.library.Repositories.BookRepository;
 import com.example.library.Repositories.BorrowerRepository;
+import com.example.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class BorrowerController {
@@ -23,6 +24,20 @@ public class BorrowerController {
 
     private final
     BookRepository bookRepository;
+
+    @Autowired
+    BookService bookService;
+
+    @RequestMapping(path = {"/borrower/search","/search"})
+    public String home(Book shop, Model model, String keyword) {
+        if(keyword!=null) {
+            List<Book> list = bookService.getByKeyword(keyword);
+            model.addAttribute("list", list);
+        }else {
+            List<Book> list = bookService.getAllBooks();
+            model.addAttribute("list", list);}
+        return "searchPage";
+    }
 
 
 
@@ -62,6 +77,21 @@ public class BorrowerController {
 
         borrowerRepository.save(borrower);
         return "redirect:/borrower/";
+    }
+
+    @GetMapping("/borrower/search/")
+    public String postSearch(Model model){
+        model.addAttribute("book", new Book());
+        System.out.println(model.getAttribute("book"));
+
+
+        return "searchPage";
+    }
+    @PostMapping("/borrower/search/{title}")
+    public String se(@PathVariable("title") String title, Model model){
+        model.addAttribute("book", bookRepository.findAllByTitle(title));
+        System.out.println("\n\n\n\n"+title+"\n\n\n\n");
+        return "searchPage";
     }
     @PostMapping("/borrower/")
     public String postMain(@Valid @ModelAttribute("borrower") Borrower borrower, BindingResult errors , Model model){
